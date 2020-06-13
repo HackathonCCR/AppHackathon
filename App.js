@@ -1,19 +1,37 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation-drawer'
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
-}
+import Home from './src/pages/Home';
+import Contato from './src/pages/Contato';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+import CustomDrawer from './src/pages/components/CustomDrawer'
+import { Ionicons} from '@expo/vector-icons';
+
+const Routes = createAppContainer(
+  createDrawerNavigator({
+    Home:{
+      screen: Home,
+      navigationOptions: {
+        drawerIcon: (
+          <Ionicons name="md-home" size={24} />
+        )
+      }
+    },
+    Contato: {
+      screen: Contato,
+      navigationOptions: {
+        drawerIcon: (
+          <Ionicons name="md-call" size={24} />
+        )
+      }
+    }
+  }, {
+    initialRouteName: 'Home',
+    contentComponent: CustomDrawer,
+    drawerWidth: 280,
+    drawerPosition: "right",
+  })
+)
+
+export default Routes;
