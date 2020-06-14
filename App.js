@@ -1,37 +1,38 @@
-import React from 'react';
-import { createAppContainer } from 'react-navigation';
-import { createDrawerNavigator } from 'react-navigation-drawer'
+import React, { Component } from 'react';
+
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import Home from './src/pages/Home';
-import Contato from './src/pages/Contato';
+import Footer from './src/pages/components/Footer';
+import PlanejarViagem from './src/pages/PlanejarViagem';
+import TracarRota from './src/pages/TracarRota';
+import IniciarViagem from './src/pages/IniciarViagem';
+import PontosProximos from './src/pages/PontosProximos';
+import PontoParada from './src/pages/PontoParada';
 
-import CustomDrawer from './src/pages/components/CustomDrawer'
-import { Ionicons} from '@expo/vector-icons';
+const Stack = createStackNavigator();
 
-const Routes = createAppContainer(
-  createDrawerNavigator({
-    Home:{
-      screen: Home,
-      navigationOptions: {
-        drawerIcon: (
-          <Ionicons name="md-home" size={24} />
-        )
-      }
-    },
-    Contato: {
-      screen: Contato,
-      navigationOptions: {
-        drawerIcon: (
-          <Ionicons name="md-call" size={24} />
-        )
-      }
-    }
-  }, {
-    initialRouteName: 'Home',
-    contentComponent: CustomDrawer,
-    drawerWidth: 280,
-    drawerPosition: "right",
-  })
-)
+export default class App extends Component {
+render() {
+  return(
+<>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home" screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Footer" component={Footer} />
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="PlanejarViagem" component={PlanejarViagem} />
+        <Stack.Screen name="TracarRota" component={TracarRota} />
+        <Stack.Screen name="IniciarViagem" component={IniciarViagem} />
+        <Stack.Screen name="PontosProximos" component={PontosProximos} />
+        <Stack.Screen name="PontoParada" component={PontoParada} />
+      </Stack.Navigator>
+    </NavigationContainer>
 
-export default Routes;
+</>
+  );
+}
+}
+
+// export default Routes;
